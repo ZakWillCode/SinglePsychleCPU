@@ -22,7 +22,7 @@ module register
 		reg_array [3] <= 0;
 	end
 	
-	always @ (posedge clk or posedge rst) begin 	//register needs this or it doesn't compile
+	always @ (negedge clk or posedge rst) begin 	//register needs this or it doesn't compile
 		
 		//Assign values
 		ra = inst[11:10];
@@ -42,12 +42,11 @@ module register
 			end  
 		end 
 
+	end
+
 	always @ (*) begin
 		reg_data1 <= reg_array[ra];
 		reg_data2 <= reg_array[rb];
 	end	
-		
-		
-	end
 
 endmodule  

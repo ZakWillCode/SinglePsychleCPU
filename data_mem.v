@@ -24,7 +24,7 @@
 		
 	end  
 
-	always @(posedge clk or posedge rst) begin 
+	always @(negedge clk or posedge rst) begin 
 			
 		ea = inst[7:0]; //Get ea from instruction
 		

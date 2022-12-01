@@ -27,13 +27,15 @@ module ALU(
 				result <= in_A;
 			4'b0111: //IN
 				result <= 8'b0;
-			4'b1000:   //MOV
+			4'b1000: //MOV
 				result <= in_B;
+			4'b1110: //STORE
+				result <= in_A;
 			default: ;
 		endcase
 	end
 	
-	always @(posedge clk or posedge rst) begin
+	always @(negedge clk or posedge rst) begin
 		
 		if (rst) begin //Reset
 			N <= 1'b0;

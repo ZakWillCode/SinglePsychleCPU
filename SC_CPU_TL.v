@@ -11,12 +11,12 @@ module SC_CPU_TL(
 	wire [15:0] inst;	
 	wire [7:0] pc, pc_plus2, pc_in, LR;
 	wire [7:0] reg_data1, reg_data2;
-	wire [7:0] result, wt_out, mem_data;
+	wire [7:0] result, mem_data;
 	wire [7:0] reg_data_in;
 	wire [7:0] wb_out;
 	wire [3:0] alu_sel;
 	wire [1:0] pc_sel, wb_sel;
-	wire wb_demux_sel, br_sel, wt_sel;
+	wire wb_demux_sel, br_sel;
 	wire lr_en, reg_en, mem_en;
 	wire z, n;
 	wire br_mux;
@@ -29,7 +29,6 @@ module SC_CPU_TL(
 		.pc_sel(pc_sel),
 		.wb_sel(wb_sel),
 		.wb_demux_sel(wb_demux_sel),
-		.wt_sel(wt_sel),
 		.br_sel(br_sel),
 		.lr_en(lr_en),
 		.reg_en(reg_en),
@@ -39,7 +38,7 @@ module SC_CPU_TL(
 	//Program counter
 	pc u_pc (
 		.clk(clk),
-		.rst(rst),
+		.rst(!rst),
 		.pc_in(pc_in),
 		.pc_out(pc)
 	);
@@ -59,7 +58,7 @@ module SC_CPU_TL(
 	//Register file
 	register u_rf (
 		.clk(clk),
-		.rst(rst),
+		.rst(!rst),
 		.inst(inst),
 		.data(reg_data_in),
 		.reg_en(reg_en),
@@ -70,7 +69,7 @@ module SC_CPU_TL(
 	//ALU
 	ALU u_alu(
 		.clk(clk),
-		.rst(rst),
+		.rst(!rst),
 		.sel(alu_sel),
 		.in_A(reg_data1),
 		.in_B(reg_data2),
@@ -82,9 +81,9 @@ module SC_CPU_TL(
 	//Data memory
 	data_mem u_dm (
 		.clk(clk),
-		.rst(rst),
+		.rst(!rst),
 		.inst(inst),
-		.result(wt_out),
+		.result(result),
 		.mem_en(mem_en),
 		.data(mem_data)
 	);
@@ -92,7 +91,7 @@ module SC_CPU_TL(
 	//Link register
 	link_reg u_lr (
 		.clk(clk),
-		.rst(rst),
+		.rst(!rst),
 		.lr_en(lr_en),
 		.lr_in(pc_plus2),
 		.LR(LR)
@@ -100,7 +99,7 @@ module SC_CPU_TL(
 	
 	//Writeback multiplexor 4 to 1
 	mux_4to1 u_wb_m (
-		.A(wt_out),
+		.A(result),
 		.B(IN_PORT),
 		.C(inst[7:0]),
 		.D(mem_data),
@@ -114,14 +113,6 @@ module SC_CPU_TL(
 		.B(OUT_PORT),
 		.sel(wb_demux_sel),
 		.in(wb_out)
-	);
-
-	//Writeto multiplexor 1 to 2
-	mux_2to1_8bit u_wt_m (
-		.A(result),
-		.B(reg_data1),
-		.out(wt_out),
-		.sel(wt_sel)
 	);
 	
 	//Branch multiplexor

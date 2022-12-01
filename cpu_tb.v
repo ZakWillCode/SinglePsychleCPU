@@ -16,11 +16,11 @@ SC_CPU_TL uut
 
 	initial begin
 		clk	= 0;
-		rst	= 0;
-		in	= 0;
+		rst	= 1;
+		in	= 4'hF;
 	end
 	
 	always begin
-		#250; clk = ~clk;
+		#10; clk = ~clk;
 	end
 endmodule

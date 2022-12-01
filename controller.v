@@ -5,7 +5,7 @@ module controller (
 	
 	output reg [3:0] alu_op,
 	output reg [1:0] pc_sel, wb_sel,
-	output reg 		 wb_demux_sel, br_sel, wt_sel, lr_en, reg_en, mem_en
+	output reg 		 wb_demux_sel, br_sel, lr_en, reg_en, mem_en
 
 );
 	
@@ -37,7 +37,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;
 				lr_en		 <= 1'b0;
@@ -50,7 +49,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -63,7 +61,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -76,7 +73,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -89,7 +85,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -102,7 +97,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -113,11 +107,10 @@ module controller (
 				
 				pc_sel 		 <= 2'b0;
 				wb_sel 		 <= 2'b00;
-				wb_demux_sel <= 1'b1;
+				wb_demux_sel 	 <= 1'b1;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
-				reg_en		 <= 1'b1;
+				reg_en		 <= 1'b0;
 				lr_en		 <= 1'b0;
 				mem_en		 <= 1'b0;
 			end
@@ -125,10 +118,9 @@ module controller (
 				alu_op 		 <= temp_op;
 				
 				pc_sel 		 <= 2'b0;
-				wb_sel 		 <= 2'b10;
+				wb_sel 		 <= 2'b01;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -141,7 +133,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
 				lr_en		 <= 1'b0;
@@ -154,7 +145,6 @@ module controller (
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
 				br_sel 		 <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;
 				lr_en		 <= 1'b0;
@@ -164,7 +154,6 @@ module controller (
 				
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;
 				lr_en		 <= 1'b0;
@@ -191,7 +180,6 @@ module controller (
 				pc_sel 		 <= 2'b10;
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				br_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;
@@ -204,7 +192,6 @@ module controller (
 				pc_sel 		 <= 2'b01;
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				br_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;
@@ -217,7 +204,6 @@ module controller (
 				pc_sel 		 <= 2'b00;
 				wb_sel 		 <= 2'b11;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				br_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
@@ -230,7 +216,6 @@ module controller (
 				pc_sel 		 <= 2'b00;
 				wb_sel 		 <= 2'b00;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b1;
 				br_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;
@@ -243,7 +228,6 @@ module controller (
 				pc_sel 		 <= 2'b00;
 				wb_sel 		 <= 2'b10;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				br_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b1;
@@ -256,7 +240,6 @@ module controller (
 				pc_sel 		 <= 2'b0;
 				wb_sel 		 <= 2'b0;
 				wb_demux_sel <= 1'b0;
-				wt_sel 		 <= 1'b0;
 				br_sel 		 <= 1'b0;
 				
 				reg_en		 <= 1'b0;

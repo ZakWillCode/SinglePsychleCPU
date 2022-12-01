@@ -9,7 +9,7 @@ module link_reg
 	output 	reg [7:0]	LR		//read port
  );  
  
-	always @ (posedge clk or posedge rst) begin 	
+	always @ (negedge clk or posedge rst) begin 	
 
 		if(rst) begin  				//resets registers
 		LR <= 8'b0;
